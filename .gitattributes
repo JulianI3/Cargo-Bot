@@ -1,2 +1,12 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+Objetivo: Se busca realizar el diseño de un robot que tenga la 
+capacidad de producir las siguientes acciones:
+● El robot tendrá la capacidad de levantar objetos de 
+ligero tamaño y peso.
+● Este se podrá desplazar a través de una superficie.
+● Tendrá una aplicación de movil que permitirá el controlar 
+sus movimientos
+
+
