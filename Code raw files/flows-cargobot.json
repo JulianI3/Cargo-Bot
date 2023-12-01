@@ -1,0 +1,440 @@
+[
+    {
+        "id": "fe4375d32da664c9",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "abb1cbcccdedcc71",
+        "type": "ui_joystick",
+        "z": "fe4375d32da664c9",
+        "name": "down joystick",
+        "group": "35483a4aeb1cf789",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "trigger": "all",
+        "timeInterval": "250",
+        "useThemeColor": true,
+        "color": "#000000",
+        "threshold": "0.8",
+        "directions": "all",
+        "shape": "circle",
+        "centerAtRelease": true,
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "327d6042fbba1130"
+            ]
+        ]
+    },
+    {
+        "id": "046f77b0f6b335ca",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "right servo",
+        "func": "msg.payload=\"position(derecha ,\" + msg.payload.angle.degree + \")\" + \"\\r\"\nreturn msg; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 200,
+        "wires": [
+            [
+                "70ae8e4092db9c4f",
+                "3fc156253545e45e"
+            ]
+        ]
+    },
+    {
+        "id": "70ae8e4092db9c4f",
+        "type": "debug",
+        "z": "fe4375d32da664c9",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "5ef20e99c253b54e",
+        "type": "ui_joystick",
+        "z": "fe4375d32da664c9",
+        "name": "up joystick",
+        "group": "35483a4aeb1cf789",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "trigger": "all",
+        "timeInterval": "250",
+        "useThemeColor": true,
+        "color": "#000000",
+        "threshold": "0.8",
+        "directions": "all",
+        "shape": "circle",
+        "centerAtRelease": true,
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "1a3621467b051039"
+            ]
+        ]
+    },
+    {
+        "id": "3fc156253545e45e",
+        "type": "serial out",
+        "z": "fe4375d32da664c9",
+        "name": "ESP32",
+        "serial": "f1ab067acdac26df",
+        "x": 920,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "327d6042fbba1130",
+        "type": "switch",
+        "z": "fe4375d32da664c9",
+        "name": "xy plane",
+        "property": "payload.direction.angle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "left",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "right",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "up",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "down",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 240,
+        "y": 240,
+        "wires": [
+            [
+                "c3a63e1141c04d54"
+            ],
+            [
+                "f2b0fb2dcba4838b"
+            ],
+            [
+                "0c86d1100fd6291b"
+            ],
+            [
+                "fd0b8c2a3563c1ec"
+            ]
+        ]
+    },
+    {
+        "id": "0c86d1100fd6291b",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "fix angle",
+        "func": "msg.payload.angle.degree=msg.payload.angle.degree.toFixed(0)-45\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 300,
+        "wires": [
+            [
+                "6faa2443bff2c730"
+            ]
+        ]
+    },
+    {
+        "id": "6faa2443bff2c730",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "down servo",
+        "func": "msg.payload=\"position(abajo, \" + msg.payload.angle.degree + \")\" + \"\\r\"\nreturn msg; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 320,
+        "wires": [
+            [
+                "70ae8e4092db9c4f",
+                "3fc156253545e45e"
+            ]
+        ]
+    },
+    {
+        "id": "fd0b8c2a3563c1ec",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "fix angle",
+        "func": "msg.payload.angle.degree=msg.payload.angle.degree.toFixed(0)-135\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 340,
+        "wires": [
+            [
+                "6faa2443bff2c730"
+            ]
+        ]
+    },
+    {
+        "id": "c3a63e1141c04d54",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "fix angle",
+        "func": "msg.payload.angle.degree=-(msg.payload.angle.degree.toFixed(0)-225)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 180,
+        "wires": [
+            [
+                "046f77b0f6b335ca"
+            ]
+        ]
+    },
+    {
+        "id": "f2b0fb2dcba4838b",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "fix angle",
+        "func": "if (msg.payload.angle.degree<=45)\n    msg.payload.angle.degree=msg.payload.angle.degree.toFixed(0)-(-45)\nelse\n    msg.payload.angle.degree = msg.payload.angle.degree.toFixed(0)-315\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "046f77b0f6b335ca"
+            ]
+        ]
+    },
+    {
+        "id": "3de129cc13aebb83",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "left servo",
+        "func": "msg.payload=\"position(izquierda ,\" + msg.payload.angle.degree + \")\" + \"\\r\"\nreturn msg; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 440,
+        "wires": [
+            [
+                "77d878d703139692",
+                "f64d9d4b676d8e42"
+            ]
+        ]
+    },
+    {
+        "id": "77d878d703139692",
+        "type": "debug",
+        "z": "fe4375d32da664c9",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f64d9d4b676d8e42",
+        "type": "serial out",
+        "z": "fe4375d32da664c9",
+        "name": "ESP32",
+        "serial": "f1ab067acdac26df",
+        "x": 920,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "d2bf5212182757d0",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "fix angle",
+        "func": "msg.payload.angle.degree=msg.payload.angle.degree.toFixed(0)-225\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 540,
+        "wires": [
+            [
+                "1f09791f59492b14"
+            ]
+        ]
+    },
+    {
+        "id": "1f09791f59492b14",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "wrap servo",
+        "func": "msg.payload=\"position(garra, \" + msg.payload.angle.degree + \")\" + \"\\r\"\nreturn msg; ",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 560,
+        "wires": [
+            [
+                "77d878d703139692",
+                "f64d9d4b676d8e42"
+            ]
+        ]
+    },
+    {
+        "id": "1a3621467b051039",
+        "type": "switch",
+        "z": "fe4375d32da664c9",
+        "name": "yz plane",
+        "property": "payload.direction.angle",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "left",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "down",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 260,
+        "y": 500,
+        "wires": [
+            [
+                "9d9dbc596668c243"
+            ],
+            [
+                "d2bf5212182757d0"
+            ]
+        ]
+    },
+    {
+        "id": "9d9dbc596668c243",
+        "type": "function",
+        "z": "fe4375d32da664c9",
+        "name": "fix angle",
+        "func": "msg.payload.angle.degree=msg.payload.angle.degree.toFixed(0)-135\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 460,
+        "wires": [
+            [
+                "3de129cc13aebb83"
+            ]
+        ]
+    },
+    {
+        "id": "35483a4aeb1cf789",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "dd0c1b9d44674c34",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f1ab067acdac26df",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "COM3",
+        "serialbaud": "57600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "dd0c1b9d44674c34",
+        "type": "ui_tab",
+        "name": "CargoBot",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
